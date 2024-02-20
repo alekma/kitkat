@@ -96,6 +96,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "kitkat:build:production",
+              "serveTarget": "kitkat:serve:production"
+            },
+            "development": {
+              "buildTarget": "kitkat:build:development",
+              "serveTarget": "kitkat:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
