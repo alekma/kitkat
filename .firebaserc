@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "kitkat-1f4a0"
+  },
+  "targets": {
+    "kitkat-1f4a0": {
+      "hosting": {
+        "kitkat": [
+          "kitkat-1f4a0"
+        ]
+      }
+    }
+  }
+}
