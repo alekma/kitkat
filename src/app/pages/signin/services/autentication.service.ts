@@ -1,35 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, catchError, from, throwError } from 'rxjs';
+import {
+  Auth,
+  authState,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
+import { catchError, from, throwError } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AutenticationService {
-  constructor(private auth: AngularFireAuth) {}
-
-  signIn(params: SignIn): Observable<any> {
-    return from(
-      this.auth.signInWithEmailAndPassword(params.email, params.password)
-    ).pipe(
-      catchError((error: FirebaseError) =>
-        throwError(() => new Error(this.translateFirebaseErrorMessage(error)))
-      )
-    );
-  }
-
-  private translateFirebaseErrorMessage({ code, message }: FirebaseError) {
-    if (code === 'auth/user-not-found') {
-      return 'User not found.';
-    }
-    if (code === 'auth/wrong-password') {
-      return 'User not found.';
-    }
-    return message;
-  }
-}
-
-type SignIn = {
+type User = {
   email: string;
   password: string;
 };
@@ -38,3 +15,42 @@ type FirebaseError = {
   code: string;
   message: string;
 };
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AutenticationService {
+  currentUser$ = authState(this.auth);
+
+  constructor(private auth: Auth) {}
+
+  public signInWithEmailAndPassword(user: User) {
+    return from(
+      signInWithEmailAndPassword(this.auth, user.email, user.password)
+    ).pipe(
+      catchError((error: FirebaseError) =>
+        throwError(() => new Error(this.translateFirebaseErrorMessage(error)))
+      )
+    );
+  }
+
+  public logout() {
+    return from(this.auth.signOut());
+  }
+
+  private translateFirebaseErrorMessage({ code, message }: FirebaseError) {
+    if (code === 'auth/user-not-found') {
+      return 'User not found.';
+    }
+    if (code === 'auth/invalid-credential') {
+      return 'User not found.';
+    }
+    if (code === 'auth/wrong-password') {
+      return 'User not found.';
+    }
+    if (code === 'auth/invalid-email') {
+      return 'User not found.';
+    }
+    return message;
+  }
+}
