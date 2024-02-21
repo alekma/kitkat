@@ -1,2 +1,10 @@
 <app-navbar></app-navbar>
-<p>home works!</p>
+<main>
+  @for (fact of facts; track fact) {
+  <mat-card>
+    <mat-card-content>
+      {{ fact.fact }}
+    </mat-card-content>
+  </mat-card>
+  }
+</main>

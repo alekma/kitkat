@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AutenticationService } from './services/autentication.service';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-signin',
@@ -24,7 +23,6 @@ import { AsyncPipe } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AsyncPipe,
   ],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
