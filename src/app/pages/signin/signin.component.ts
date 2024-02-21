@@ -34,7 +34,7 @@ export class SigninComponent {
   isLoggingIn = false;
 
   constructor(
-    public authenticationService: AutenticationService,
+    private authenticationService: AutenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar

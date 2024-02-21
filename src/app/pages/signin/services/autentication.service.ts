@@ -4,6 +4,7 @@ import {
   authState,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { catchError, from, throwError } from 'rxjs';
 
 type User = {
