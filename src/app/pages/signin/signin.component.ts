@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AutenticationService } from './services/autentication.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-signin',
@@ -23,6 +24,7 @@ import { AutenticationService } from './services/autentication.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    AsyncPipe,
   ],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
@@ -32,7 +34,7 @@ export class SigninComponent {
   isLoggingIn = false;
 
   constructor(
-    private authenticationService: AutenticationService,
+    public authenticationService: AutenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar
