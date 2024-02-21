@@ -1,0 +1,52 @@
+<main>
+  <form [formGroup]="form">
+    <h1>Enter with your account</h1>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="Ex: pat@example.com"
+        formControlName="email"
+      />
+      @if (form.get('email')!.hasError('required')) {
+      <mat-error> Email is required </mat-error>
+      } @if (form.get('email')!.hasError('email')) {
+      <mat-error> Email is invalid </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        formControlName="password"
+      />
+
+      @if (form.get('password')!.hasError('required')) {
+      <mat-error> Password is required </mat-error>
+      }
+    </mat-form-field>
+    @if (!isLoggingIn) {
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!form.valid"
+      (click)="login()"
+      test-id="login-button"
+    >
+      LOGIN
+    </button>
+    } @if (isLoggingIn) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="button-loader"
+      test-id="login-loader"
+    >
+      <mat-spinner color="accent" diameter="20"></mat-spinner>
+    </button>
+    }
+  </form>
+</main>
